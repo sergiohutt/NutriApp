@@ -1,0 +1,279 @@
+﻿@model List<NutriApp.Models.Group>
+@{
+    ViewBag.Title = "GroupAdmin";
+}
+
+<body>
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo right">Logo</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>@Html.ActionLink("Groups", "index", "GroupAdmin", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Users", "index", "UserAdmin", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Recetas", "index", "RecetasAdmin", null, new { @class = "page-scroll" })</li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Clinica Nutricional</h1>
+            <h3>Group Admin</h3>
+            <ul class="list-unstyled"></ul>
+        </div>
+    </div>
+
+    @*<script>
+            $(function () {
+                $("#GroupIdBuscar").click(function () {
+                    var url = "@Url.Action("Buscar", "GroupAdmin")";
+                    var GroupId = $("#txtGroupId").val();
+                    var data = { GroupId: GroupId };
+
+                    $.post(url, data).done(function (data) {
+                        $("#tblGroups").html(data);
+                    });
+                });
+            });
+    </script>*@
+    
+    @*<script> function myfunction() {
+         $("#GroupIdBuscar").click(function () {
+             var url = "@Url.Action("Buscar", "GroupAdmin")";
+             var GroupId = $("#txtGroupId").val();
+             var data = { GroupId: GroupId };
+
+            $.post(url, data).done(function (data) {
+                $("#tblGroups").html(data);
+            });
+         });
+         }
+    </script>*@
+    
+    
+
+    <form @*action='@Url.Action("Buscar","GroupAdmin")'*@  method="post">
+        <div class="row">
+            <div class="input-field col s6">
+                <label class="active" for='GroupID'>GroupID</label>
+                <input @*placeholder="###"*@ id="txtGroupId" type="number" name="GroupId">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label class="active" for='Topic'>Topic</label>
+                <input @*placeholder="###"*@ id="txtTopic" type="text" name="Topic">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label class="active" for='UserID'>UserID</label>
+                <input @*placeholder="###"*@ id="txtUserId" type="text" name="UserId">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label class="active" for='Description'>Description</label>
+                <input @*placeholder="###"*@ id="txtDescription" type="text" name="Description">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label class="active" for='GroupType'>Group Type</label>
+                <input @*placeholder="###"*@ id="txtGroupType" type="number" name="GroupType">
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" id="btnGroupIdBuscar" formaction='@Url.Action("Buscar","GroupAdmin")'>Buscar</button>
+        <button class="btn waves-effect waves-light" type="submit" id="btnGroupIdAgregar" formaction='@Url.Action("Agregar","GroupAdmin")' formmethod="get">Agregar</button>
+        <button class="btn waves-effect waves-light" type="submit" id="btnGroupIdEliminar"formaction='@Url.Action("Eliminar","GroupAdmin")' formmethod="get">Eliminar</button>
+    </form>
+
+        @*<script type="text/javascript">
+                $(function () {
+                    $("#GroupIdBuscar").click(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/GroupAdmin/Buscar",
+                            data: '{GroupId: "' + $("#txtGroupId").val() + '" }',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                $("#tblGroups").html(response);
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>*@
+
+
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>UserID</th>
+                    <th>GroupID</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+
+            @* ***Add table content*** *@
+            <tbody id="tblGroups">
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Topic)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UserID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GroupID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <br />
+        <br />
+
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>UserID</th>
+                    <th>GroupID</th>
+                    <th>Fecha</th>
+                    <th>Peso</th>
+                    <th>IMC</th>
+                    <th>% Grasa</th>
+                    <th>% Musculo</th>
+                    <th>Edad Metabologica</th>
+                    <th>Grasa Viceral</th>
+                    <th>% Agua</th>
+                </tr>
+            </thead>
+
+            @* ***Add table content*** *@
+            <tbody>
+                @foreach (var m in ViewBag.Measures as List<NutriApp.Models.Measure>)
+            {
+                    <tr>
+                        <td>@(m.UserID)</td>
+                        <td>@(m.GroupID)</td>
+                        <td>@(m.Date)</td>
+                        <td>@(m.Weight)</td>
+                        <td>@(m.IMC)</td>
+                        <td>@(m.Fat_Percentage)</td>
+                        <td>@(m.Muscle_Percentage)</td>
+                        <td>@(m.Methabolic_Age)</td>
+                        <td>@(m.Viceral_Fat)</td>
+                        <td>@(m.Water_Percentage)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <br />
+        <br />
+
+        <form method="post">
+            <p>
+                <input name="Peso" type="radio" id="rbtnPeso" formaction='@Url.Action("Chart","GroupAdmin")' formmethod="get" />
+                <label for="rbtnPeso">Peso</label>
+            </p>
+            <p>
+                <input name="IMC" type="radio" id="rbtnIMC" />
+                <label for="rbtnIMC">IMC</label>
+            </p>
+            <p>
+                <input name="Grasa" type="radio" id="rbtnGrasa" />
+                <label for="rbtnGrasa">% Grasa</label>
+            </p>
+            <p>
+                <input name="Musculo" type="radio" id="rbtnMusculo" />
+                <label for="rbtnMusculo">% Musculo</label>
+            </p>
+            <p>
+                <input name="Edad" type="radio" id="rbtnEdad" />
+                <label for="rbtnEdad">Edad Metabologica</label>
+            </p>
+            <p>
+                <input name="GrasaV" type="radio" id="rbtnGrasaV" />
+                <label for="rbtnGrasaV">Grasa Viceral</label>
+            </p>
+            <p>
+                <input name="Agua" type="radio" id="rbtnAgua" />
+                <label for="rbtnAgua">% Agua</label>
+            </p>
+        </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["May'17", "June'17", "July'17", "Aug'17", "Sept'17", "Oct'17"],
+                    datasets: [{
+                        label: 'Peso',
+                        data: [91, 89, 87, 85, 82, 79],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+    </script>
+
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Clinica Nutricional</h5>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Links</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="About.cshtml">About</a></li>
+                            <li><a class="grey-text text-lighten-3" href="Help.cshtml">Help</a></li>
+                            <li><a class="grey-text text-lighten-3" href="Recetas.cshtml">Recetas</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+</body>
+

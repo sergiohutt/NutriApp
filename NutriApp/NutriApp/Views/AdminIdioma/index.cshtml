@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "AdminIdioma";
+}
+
+<body>
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo right">Logo</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>@Html.ActionLink("Groups", "index", "GroupAdmin", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Users", "index", "UserAdmin", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Recetas", "index", "RecetasAdmin", null, new { @class = "page-scroll" })</li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Clinica Nutricional</h1>
+            <h3>Idioma Admin</h3>
+            <ul class="list-unstyled"></ul>
+        </div>
+    </div>
+
+    <script>
+        $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrainWidth: false,
+            hover: true,
+            gutter: 0,
+            belowOrigin: false,
+            alignment: 'left',
+            stopPropagation: false
+        }
+        );
+    </script>
+
+    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Idioma</a>
+    <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">Idioma 1</a></li>
+        <li><a href="#!">Idioma 2</a></li>
+    </ul>
+
+    <br />
+
+    <div class="row">
+        <div class="input-field col s6">
+            <input id="@*Idioma*@" type="text" class="validate">
+            <label class="active" for="Idioma">Idioma</label><a class="waves-effect waves-light btn">Agregar</a>
+            <label class="active" for="Idioma">Idioma</label><a class="waves-effect waves-light btn">Eliminar</a>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Clinica Nutricional</h5>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="About.cshtml">About</a></li>
+                        <li><a class="grey-text text-lighten-3" href="Help.cshtml">Help</a></li>
+                        <li><a class="grey-text text-lighten-3" href="Recetas.cshtml">Recetas</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+

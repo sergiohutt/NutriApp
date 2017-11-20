@@ -1,0 +1,18 @@
+﻿@model List<NutriApp.Models.Appointment>
+@{
+    ViewBag.Title = "Home Page";
+}
+<table style="margin:30px" class="table">
+    <tr>
+        <th>User ID</th>
+        <th>Fecha</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.UserID)</td>
+            <td>@Html.DisplayFor(modelItem => item.Date)</td>
+        </tr>
+    }
+</table>
+

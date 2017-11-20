@@ -1,0 +1,169 @@
+﻿@model List<NutriApp.Models.Diet>
+@{
+    ViewBag.Title = "DietaCliente";
+}
+
+<body>
+
+    <script>
+        $(".dropdown-button").dropdown();
+    </script>
+
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">Idioma 1</a></li>
+        <li><a href="#!">Idioma 2</a></li>
+    </ul>
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Logo</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>@Html.ActionLink("Citas", "index", "CitasCliente", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Dieta", "index", "DietaCliente", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Recetas", "index", "RecetasCliente", null, new { @class = "page-scroll" })</li>
+            </ul>
+            <ul id="nav-mobile2" class="right hide-on-med-and-down">
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Idioma<i class="material-icons right"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Clinica Nutricional</h1>
+            <h3>Dieta</h3>
+            <ul class="list-unstyled"></ul>
+        </div>
+    </div>
+
+    <script>
+        $('.datepicker').pickadate({
+            selectMonths: true, 
+            selectYears: 15 
+        });
+    </script>
+
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Usuario" type="text" class="validate">
+                    <label for="Usuario">Usuario</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Fecha" type="date" class="datepicker">
+                    <label class="active" for="Fecha">Fecha</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Lacteos" type="text" class="validate">
+                    <label for="Lacteos">Lacteos</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Frutas" type="text" class="validate">
+                    <label for="Frutas">Frutas</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Harinas" type="text" class="validate">
+                    <label for="Harinas">Harinas</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Proteina" type="text" class="validate">
+                    <label for="Proteina">Proteina</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Vegetales" type="text" class="validate">
+                    <label for="Vegetales">Vegetales</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Grasa" type="text" class="validate">
+                    <label for="Grasa">Grasa</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Azucar" type="text" class="validate">
+                    <label for="Azucar">Azucar</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Liquidos" type="text" class="validate">
+                    <label for="Liquidos">Liquidos</label>
+                </div>
+            </div>
+        </form>
+        <a class="waves-effect waves-light btn">Guardar</a>
+    </div>
+
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>UserID</th>
+                <th>GroupID</th>
+                <th>Fecha</th>
+                <th>Lacteos</th>
+                <th>Frutas</th>
+                <th>Harinas</th>
+                <th>Proteinas</th>
+                <th>Vegetales</th>
+                <th>Grasas</th>
+                <th>Azucar</th>
+                <th>Liquidos</th>
+            </tr>
+        </thead>
+
+        @* ***Add table content*** *@
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.UserID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.GroupID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Dairy)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Fruit)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Carbohidrate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Protein)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Vegetable)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Fat)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Sugar)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Water)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Clinica Nutricional</h5>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="About.cshtml">About</a></li>
+                        <li><a class="grey-text text-lighten-3" href="Help.cshtml">Help</a></li>
+                        <li><a class="grey-text text-lighten-3" href="Recetas.cshtml">Recetas</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
