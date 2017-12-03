@@ -4,16 +4,23 @@
 }
 
 <body>
-Prueba: 
-    <script>
-        $(".dropdown-button").dropdown();
+       <div id="google_translate_element"></div>
+    <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
     </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">Idioma 1</a></li>
-        <li><a href="#!">Idioma 2</a></li>
-    </ul>
-
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Logo</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>@Html.ActionLink("Citas", "index", "CitasCliente", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Dieta", "index", "DietaCliente", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Recipes", "index", "RecetasCliente", null, new { @class = "page-scroll" })</li>
+            </ul>
+        </div>
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">Logo</a>
