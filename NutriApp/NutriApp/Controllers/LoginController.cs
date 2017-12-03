@@ -12,38 +12,63 @@ namespace NutriApp.Controllers
     {
         SqlConnection conn = new SqlConnection("Data Source = (local); Initial Catalog = NutriApps; Integrated Security = True");
 
+        private NutriAppsEntities db = new NutriAppsEntities();
         public ActionResult Index()
         {
-            NutriAppsEntities db = new NutriAppsEntities();
+            //NutriAppsEntities db = new NutriAppsEntities();
             List<Appointment> lstAppointments = db.Appointments.ToList();
             return View(lstAppointments);
         }
 
         public ActionResult Login(string Username, string Password)
         {
-            string queryString =
-            "SELECT UserID FROM dbo.Users WHERE UserID = " + Username + "";
-            using (SqlConnection connection = new SqlConnection(
-                       "Data Source = (local); Initial Catalog = NutriApps; Integrated Security = True"))
+            Session.Add("UserName", Username);
+            //string queryString =
+            //"SELECT UserID FROM dbo.Users  WHERE UserID = '" + Username + "'";
+            //string DBUserID = string.Empty;
+            //using (SqlConnection connection = new SqlConnection(
+            //           "Data Source = (local); Initial Catalog = NutriApps; Integrated Security = True"))
+            //{
+            //    SqlCommand command = new SqlCommand("SELECT UserID FROM dbo.Users  WHERE UserID=@Username", 
+            //        connection);
+            //    command.Parameters.Add(new SqlParameter("@Username", Username));
+            //    //queryString, connection);
+            //    connection.Open();
+            //    SqlDataReader reader = command.ExecuteReader();
+            //    try
+            //    {
+            //        //List<String> table = new List<String>();
+            //        while (reader.Read())
+            //        {
+            //            DBUserID = reader[0].ToString();
+            //        }
+            //    }
+            //    finally
+            //    {
+            //        reader.Close();
+            //    }
+            //}
+            User user = null;
+            try
             {
-                SqlCommand command = new SqlCommand(
-                    queryString, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                try
+                user = db.Users.Single(x => x.UserID == Username && x.Password == Password);
+            }
+            catch
+            {
+                return View();
+            }
+            if(user != null)
+            {
+                if (user.UserType == 1)
                 {
-                    List<String> table = new List<String>();
-                    while (reader.Read())
-                    {
-                        string asd = reader[0].ToString();
-                    }
+                    return RedirectToAction("Index", "AdminHome");
                 }
-                finally
+                else
                 {
-                    reader.Close();
+                    return RedirectToAction("Index", "ClientHome");
                 }
             }
-            return View("Index");
+            return View();
 
             //List<User> lstUsers = db.Users.SqlQuery("SELECT UserID FROM dbo.Users WHERE UserID = " + Username + "").ToList();
 
