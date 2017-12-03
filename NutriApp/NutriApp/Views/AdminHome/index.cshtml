@@ -1,9 +1,25 @@
-﻿
+
 @{
     ViewBag.Title = "AdminHome";
 }
 
 <body>
+       <div id="google_translate_element"></div>
+    <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo right">Logo</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>@Html.ActionLink("Groups", "index", "GroupAdmin", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Users", "index", "UserAdmin", null, new { @class = "page-scroll" })</li>
+                <li>@Html.ActionLink("Recipes", "index", "RecetasAdmin", null, new { @class = "page-scroll" })</li>
+            </ul>
+        </div>
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo right">Logo</a>
