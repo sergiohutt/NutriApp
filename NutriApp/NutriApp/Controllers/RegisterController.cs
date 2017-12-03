@@ -20,22 +20,31 @@ namespace NutriApp.Controllers
         public ActionResult Register(string Username, string Password, string RePassword, string Name, string Surname, string Email)
         {
             NutriAppsEntities db = new NutriAppsEntities();
+            User user = null;
+            user = db.Users.Single(x => x.UserID == Username);
 
-            string UserRole = "Client";
-            int UserType = 2;
+            if (user != null)
+            {
+                return View("<script language='javascript' type='text/javascript'>alert('Username already exist. Please select another username');</script>", "Register");
+            }
+            else
+            {
+                string UserRole = "Client";
+                int UserType = 2;
 
-            string sql = "INSERT INTO dbo.Users(UserID,UserRole,UserType,Password,Email,Name,Surname) VALUES(@UserID,@UserRole,@UserType,@Password,@Email,@Name,@Surname)";
-            List<SqlParameter> parameterList = new List<SqlParameter>();
-            parameterList.Add(new SqlParameter("@UserID", Username));
-            parameterList.Add(new SqlParameter("@UserRole", UserRole));
-            parameterList.Add(new SqlParameter("@UserType", UserType));
-            parameterList.Add(new SqlParameter("@Password", Password));
-            parameterList.Add(new SqlParameter("@Email", Email));
-            parameterList.Add(new SqlParameter("@Name", Name));
-            parameterList.Add(new SqlParameter("@Surname", Surname));
-            SqlParameter[] parameters = parameterList.ToArray();
-            int result = db.Database.ExecuteSqlCommand(sql, parameters);
-            return View("Index", "Login");
+                string sql = "INSERT INTO dbo.Users(UserID,UserRole,UserType,Password,Email,Name,Surname) VALUES(@UserID,@UserRole,@UserType,@Password,@Email,@Name,@Surname)";
+                List<SqlParameter> parameterList = new List<SqlParameter>();
+                parameterList.Add(new SqlParameter("@UserID", Username));
+                parameterList.Add(new SqlParameter("@UserRole", UserRole));
+                parameterList.Add(new SqlParameter("@UserType", UserType));
+                parameterList.Add(new SqlParameter("@Password", Password));
+                parameterList.Add(new SqlParameter("@Email", Email));
+                parameterList.Add(new SqlParameter("@Name", Name));
+                parameterList.Add(new SqlParameter("@Surname", Surname));
+                SqlParameter[] parameters = parameterList.ToArray();
+                int result = db.Database.ExecuteSqlCommand(sql, parameters);
+                return View("Index", "Login");
+            }
         }
 
         public ActionResult About()
